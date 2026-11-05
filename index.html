@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>FOX Vida Saudável — seus hábitos, um dia de cada vez</title>
+  <meta name="description" content="Acompanhe água, movimento, alimentação, sono e bem-estar com a FOX Vida Saudável." />
+  <meta name="theme-color" content="#f4ede1" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="top">
+      <a class="brand" href="/" aria-label="FOX Vida Saudável">
+        <svg class="fox" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M8 6 L24 22 L40 22 L56 6 L52 34 L32 58 L12 34 Z" fill="var(--fox)" />
+          <path d="M12 34 L32 40 L52 34 L32 58 Z" fill="var(--cream)" />
+          <path d="M14 14 L22 22 L16 26 Z M50 14 L42 22 L48 26 Z" fill="var(--ink)" opacity=".85" />
+          <circle cx="24" cy="31" r="2.6" fill="var(--ink)" />
+          <circle cx="40" cy="31" r="2.6" fill="var(--ink)" />
+          <path d="M29 50 L32 54 L35 50 Z" fill="var(--ink)" />
+        </svg>
+        <span class="brand-text">
+          <strong>FOX</strong>
+          <em>vida saudável</em>
+        </span>
+      </a>
+      <div class="today-label" id="todayLabel"></div>
+    </header>
+
+    <main>
+      <!-- HOJE -->
+      <section class="view is-active" id="view-today" aria-labelledby="tab-today">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow" id="greeting">Olá</p>
+            <h1 id="heroTitle">Um passo de cada vez.</h1>
+            <p class="hero-sub" id="heroSub"></p>
+          </div>
+          <div class="score" aria-live="polite">
+            <svg viewBox="0 0 120 120" class="score-ring" aria-hidden="true">
+              <circle cx="60" cy="60" r="52" class="ring-bg" />
+              <circle cx="60" cy="60" r="52" class="ring-fg" id="scoreRing" />
+            </svg>
+            <div class="score-num"><span id="scorePct">0</span><small>%</small></div>
+            <div class="score-cap" id="scoreCap">do dia</div>
+          </div>
+        </div>
+
+        <nav class="days" id="dayStrip" aria-label="Escolher dia"></nav>
+
+        <ul class="habits" id="habitList"></ul>
+        <p class="empty" id="emptyToday" hidden>
+          Nenhum hábito ainda. <button class="link" data-goto="habits">Crie o primeiro →</button>
+        </p>
+      </section>
+
+      <!-- PROGRESSO -->
+      <section class="view" id="view-progress" aria-labelledby="tab-progress">
+        <h2 class="section-title">Seu caminho<span>últimas 16 semanas</span></h2>
+        <div class="heat-wrap">
+          <div class="heat" id="heatmap" role="img" aria-label="Mapa de constância diária"></div>
+          <div class="heat-legend">
+            <span>menos</span><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>mais</span>
+          </div>
+        </div>
+
+        <div class="stats" id="statCards"></div>
+
+        <h2 class="section-title">Por hábito<span>últimos 30 dias</span></h2>
+        <ul class="per-habit" id="perHabit"></ul>
+      </section>
+
+      <!-- HÁBITOS -->
+      <section class="view" id="view-habits" aria-labelledby="tab-habits">
+        <h2 class="section-title">Seus hábitos<span>edite, reorganize, crie</span></h2>
+        <ul class="manage" id="manageList"></ul>
+
+        <form class="card form" id="habitForm" autocomplete="off">
+          <h3 id="formTitle">Novo hábito</h3>
+          <input type="hidden" name="id" />
+          <label class="field">
+            <span>Nome</span>
+            <input name="name" required maxlength="60" placeholder="Ex.: Caminhar 20 minutos" />
+          </label>
+          <div class="field">
+            <span>Ícone</span>
+            <div class="emoji-pick" id="emojiPick"></div>
+          </div>
+          <div class="field">
+            <span>Cor</span>
+            <div class="color-pick" id="colorPick"></div>
+          </div>
+          <div class="row">
+            <label class="field">
+              <span>Meta diária</span>
+              <input name="target" type="number" min="1" max="100" value="1" required />
+            </label>
+            <label class="field">
+              <span>Unidade</span>
+              <input name="unit" maxlength="20" value="vez" />
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn ghost" id="cancelEdit" hidden>Cancelar</button>
+            <button type="submit" class="btn primary" id="submitBtn">Adicionar hábito</button>
+          </div>
+          <div class="suggest">
+            <span>Ideias rápidas:</span>
+            <div id="suggestions"></div>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <nav class="tabs" role="tablist" aria-label="Navegação">
+      <button role="tab" id="tab-today" data-view="today" aria-selected="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+        Hoje
+      </button>
+      <button role="tab" id="tab-progress" data-view="progress" aria-selected="false">
+        <svg viewBox="0 0 24 24"><path d="M3 20h18M6 16v-4M10 16V8M14 16v-6M18 16V5"/></svg>
+        Progresso
+      </button>
+      <button role="tab" id="tab-habits" data-view="habits" aria-selected="false">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg>
+        Hábitos
+      </button>
+    </nav>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
