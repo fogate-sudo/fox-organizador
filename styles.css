@@ -265,3 +265,41 @@ input { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before { animation: none !important; transition: none !important; }
 }
+
+
+/* FOX ORGANIZADOR - Melhorias visuais */
+:root {
+  --fox-primary: #2563eb;
+  --fox-radius: 16px;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+}
+
+button {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+input, select, textarea {
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Cartões dos organizadores */
+.card,
+.module-card,
+.dashboard-card {
+  border-radius: var(--fox-radius);
+  transition: box-shadow 0.2s ease;
+}
+
