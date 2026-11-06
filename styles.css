@@ -302,4 +302,21 @@ a {
   border-radius: var(--fox-radius);
   transition: box-shadow 0.2s ease;
 }
+/* Correção da navegação FOX */
+.tabs {
+  width: max-content;
+  max-width: calc(100vw - 20px);
+  overflow-x: auto;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+}
 
+.tabs button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
